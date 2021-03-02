@@ -8,8 +8,7 @@ class Database{
         let data= JSON.stringify(json)
         this.storage.push({
          oldURL: data.oldUrl,
-         newURL: data.newURL,
-         id: this.storage.length,   
+         newURL: this.storage.length,
         });
     }
 }
