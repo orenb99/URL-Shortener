@@ -1,0 +1,6 @@
+getting a class
+
+validation
+
+after posting redirect to another html
+
