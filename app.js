@@ -33,9 +33,11 @@ app.post("/api/shorturl/new/", async (req,res)=>{
 
 app.get("/api/shorturl/:id",(req,res)=>{
   let {id}=req.params;
-  fs.readdir("./storage/",(err,files)=>{
-    if(files.includes(id+".json"))
-      res.sendFile(`${__dirname}/storage/${id}.json`);
+  fs.readdir("./storage/",async (err,files)=>{
+    if(files.includes(id+".json")){
+      let file=await JSON.parse(fs.readFileSync(`${__dirname}/storage/${id}.json`,"utf-8"));
+      res.redirect(302,file.oldURL)
+    }
     else
       res.status(404).send("file not found");
   })
