@@ -16,9 +16,9 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.post("/api/shorturl/new/",async (req,res)=>{
+app.post("/api/shorturl/new/", async (req,res)=>{
   let {body}=req;
-  await fs.readdir("./storage/",(err,files)=>{
+  fs.readdir("./storage/",(err,files)=>{
     let id=0;
     if(files!==undefined)
       id=files.length;
@@ -28,6 +28,16 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     }
     fs.writeFileSync(`./storage/${id}.json`,JSON.stringify(data, null, 4));
     res.send(data);
+  })
+})
+
+app.get("/api/shorturl/:id",(req,res)=>{
+  let {id}=req.params;
+  fs.readdir("./storage/",(err,files)=>{
+    if(files.includes(id+".json"))
+      res.sendFile(`${__dirname}/storage/${id}.json`);
+    else
+      res.status(404).send("file not found");
   })
 })
 
