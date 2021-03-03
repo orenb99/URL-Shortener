@@ -20,7 +20,7 @@ app.use(async (req,res,next)=>{
 
 
 app.get("/", async (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.status(302).sendFile(__dirname + "/views/index.html");
 });
 app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
