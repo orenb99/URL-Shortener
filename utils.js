@@ -2,6 +2,7 @@ const fs= require("fs");
 const Database= require("./database");
 const fetch=require("node-fetch");
 const { url } = require("inspector");
+const { urlencoded } = require("express");
 
 function createSqlDate(){
     let date=new Date();
@@ -35,25 +36,38 @@ function createSqlDate(){
 
 async function validate(url){
     const response= await fetch(url).then((res)=>true)
-    .catch((rej)=>403);
+    .catch((rej)=>checkError(url));
     return response;
  }
-function checkError(){
-    url="http://www.youtube.com/";
-    let checkProtocol;
-    if(url.startsWith("https://"){
+
+function checkError(url){
+    let checkProtocol=false;
+    let checkDomain=false;
+    if(url.startsWith("https://")){
         url=url.slice(8);
         checkProtocol=true;
     }
-    else if(url.startsWith("http://"){
+    else if(url.startsWith("http://")){
         url=url.slice(7);
         checkProtocol=true;
     }
     else
         return "Protocol Error";
-    
-    
-    return protocol;
+
+    if(url.endsWith("/"))
+        url=url.slice(0,url.length-1);
+
+    let topLevelDomains=[".com",".co.il",".org",".gov",".net"];
+    for(let domain of topLevelDomains){
+        if(url.endsWith(domain)){
+            checkDomain=true;
+            break;
+        }
+    }
+    if(!checkDomain||!url.startsWith("www."))
+        return "Hostname Error";
+        
+    return "URL Not Found";
 }
 
 module.exports ={createSqlDate,addressExists,validate,checkError};

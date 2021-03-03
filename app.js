@@ -21,7 +21,6 @@ app.use(async (req,res,next)=>{
 
 
 app.get("/", async (req, res) => {
-  console.log(utils.checkError());
   res.sendFile(__dirname + "/views/index.html");
 
 });
@@ -32,11 +31,18 @@ app.post("/api/shorturl/new/",(req,res)=>{
     if(files!==undefined){
       id=files.length;
     }
-    let status=await utils.validate(body.url);
-    if(status===403){
-      res.status(403).send("INVALID URL")
+    let valid=await utils.validate(body.url);
+
+    if(valid!==true){
+      let status;
+      if(valid==="Hostname Error"||valid==="Protocol Error")
+        status=403;
+      else if(valid==="URL Not Found")
+        status=404;
+      res.status(status).send("Invalid URL: "+valid)
       return
     }
+      
     let exists=await utils.addressExists(body.url,files);
     let data={};
     if(exists===false)
