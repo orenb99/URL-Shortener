@@ -5,6 +5,7 @@ class Database{
     }
     post(data){
         this.storage.push(data);
+        fs.writeFileSync(`./storage/data.json`,JSON.stringify(this.storage, null, 4));
     }
     async getData(){
         let res = await fs.readdir("./storage",async (err,files)=>{

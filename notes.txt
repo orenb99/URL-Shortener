@@ -1,6 +1,10 @@
 fix the async of getData()
 
-validation
+get all the data in the same JSON file
+
+similar urls
+
+testing 
 
 after posting redirect to another html
 

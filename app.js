@@ -42,7 +42,7 @@ app.post("/api/shorturl/new/",(req,res)=>{
       res.status(status).send("Invalid URL: "+valid)
       return
     }
-      
+
     let exists=await utils.addressExists(body.url,files);
     let data={};
     if(exists===false)
@@ -59,7 +59,7 @@ app.post("/api/shorturl/new/",(req,res)=>{
         creationDate: exists.creationDate,
         redirectCount: exists.redirectCount+1,
       }
-    fs.writeFileSync(`./storage/${data.shortUrl}.json`,JSON.stringify(data, null, 4));
+    // fs.writeFileSync(`./storage/${data.shortUrl}.json`,JSON.stringify(data, null, 4));
     res.send(data);
   })
 })
@@ -76,4 +76,34 @@ app.get("/api/shorturl/:id",(req,res)=>{
   })
 })
 
+app.get("/api/shorturl/:id",(req,res)=>{
+  let {id}=req.params;
+  fs.readdir("./storage/",async (err,files)=>{
+    if(files.includes(id+".json")){
+      let file=await JSON.parse(fs.readFileSync(`${__dirname}/storage/${id}.json`,"utf-8"));
+      res.redirect(302,file.originalUrl)
+    }
+    else
+      res.status(404).send("file not found");
+  })
+})
+
+app.post("/api/clearCache/all", (req,res)=>{
+  try{
+  fs.readdir(`./storage/`,(err,files)=>{
+    if(files===undefined){
+      res.send("cache is already empty");
+      return;
+    }
+    for(let file of files){
+        fs.unlinkSync(`./storage/${file}`);
+    }
+  });
+  res.send(`directory cleared`);
+  console.log("database cleared");
+  }
+  catch(e){
+    res.send(e);
+  }
+})
 module.exports = app;
