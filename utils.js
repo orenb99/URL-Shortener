@@ -32,18 +32,6 @@ function createSqlDate(){
         
  }
 
-function getData(){
-     let database= new Database();
-     fs.readdir("./storage",async (err,files)=>{
-         if(files===undefined)
-            return false;
-        for(let i=0;i<files.length;i++){
-            let item= await JSON.parse(fs.readFileSync(`${__dirname}/storage/${i}.json`,"utf-8"));
-            database.post(item);
-        }
-        return database;
-     })
 
- }
 
-module.exports ={createSqlDate,addressExists,getData};
+module.exports ={createSqlDate,addressExists};

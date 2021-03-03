@@ -12,13 +12,15 @@ app.use("/public", express.static(`./public`));
 app.use(express.urlencoded({extended:false}))
 
 
-app.get("/", (req, res) => {
-  let database=new Database();
-  database= utils.getData();
-  console.log(database)
-  res.sendFile(__dirname + "/views/index.html");
-});
+let database=new Database();
 
+
+
+app.get("/", async (req, res) => {
+  await database.getData();
+  res.sendFile(__dirname + "/views/index.html");
+
+});
 app.post("/api/shorturl/new/",(req,res)=>{
   let {body}=req;
   fs.readdir("./storage/",async(err,files)=>{

@@ -1,4 +1,4 @@
-getting a class
+fix the async of getData()
 
 validation
 
