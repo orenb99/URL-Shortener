@@ -6,16 +6,16 @@ class Database{
     post(data){
         this.storage.push(data);
     }
-    getData(){
-        fs.readdir("./storage",async (err,files)=>{
+    async getData(){
+        let res = await fs.readdir("./storage",async (err,files)=>{
             if(files===undefined)
                return false;
            for(let i=0;i<files.length;i++){
                let item= await JSON.parse(fs.readFileSync(`${__dirname}/storage/${i}.json`,"utf-8"));
                this.post(item);
            }
+           return true;
         })
-   
     }
 }
 

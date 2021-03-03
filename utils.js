@@ -1,6 +1,7 @@
 const fs= require("fs");
 const Database= require("./database");
-
+const fetch=require("node-fetch");
+const { url } = require("inspector");
 
 function createSqlDate(){
     let date=new Date();
@@ -32,6 +33,27 @@ function createSqlDate(){
         
  }
 
+async function validate(url){
+    const response= await fetch(url).then((res)=>true)
+    .catch((rej)=>403);
+    return response;
+ }
+function checkError(){
+    url="http://www.youtube.com/";
+    let checkProtocol;
+    if(url.startsWith("https://"){
+        url=url.slice(8);
+        checkProtocol=true;
+    }
+    else if(url.startsWith("http://"){
+        url=url.slice(7);
+        checkProtocol=true;
+    }
+    else
+        return "Protocol Error";
+    
+    
+    return protocol;
+}
 
-
-module.exports ={createSqlDate,addressExists};
+module.exports ={createSqlDate,addressExists,validate,checkError};

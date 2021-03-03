@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const fs= require("fs");
+const { rejects } = require("assert");
 
 app.use(cors());
 
@@ -13,11 +14,14 @@ app.use(express.urlencoded({extended:false}))
 
 
 let database=new Database();
-
+app.use(async (req,res,next)=>{
+  let result=await database.getData();
+  next();
+})
 
 
 app.get("/", async (req, res) => {
-  await database.getData();
+  console.log(utils.checkError());
   res.sendFile(__dirname + "/views/index.html");
 
 });
@@ -27,6 +31,11 @@ app.post("/api/shorturl/new/",(req,res)=>{
     let id=0;
     if(files!==undefined){
       id=files.length;
+    }
+    let status=await utils.validate(body.url);
+    if(status===403){
+      res.status(403).send("INVALID URL")
+      return
     }
     let exists=await utils.addressExists(body.url,files);
     let data={};
