@@ -1,10 +1,12 @@
-fix the async of getData()
+fix the async of getData()- Done
 
-get all the data in the same JSON file
+get all the data in the same JSON file- Done
+
+
+testing  
 
 similar urls
 
-testing 
 
 after posting redirect to another html
 

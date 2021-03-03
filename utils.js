@@ -1,8 +1,6 @@
 const fs= require("fs");
 const Database= require("./database");
 const fetch=require("node-fetch");
-const { url } = require("inspector");
-const { urlencoded } = require("express");
 
 function createSqlDate(){
     let date=new Date();
@@ -18,21 +16,6 @@ function createSqlDate(){
     dateString+=monthString+dayString+" "+timeString;
     return dateString;
 }
-
-
- async function addressExists(url,files){
-    if(files===undefined)
-        return false;
-    let urlArray=await files.map((value,index)=>
-        JSON.parse(fs.readFileSync(`${__dirname}/storage/${index}.json`,"utf-8")).originalUrl);
-    if(!urlArray.includes(url))
-        return false;
-    else{
-        let index=urlArray.indexOf(url);
-        return JSON.parse(fs.readFileSync(`${__dirname}/storage/${index}.json`,"utf-8"));
-    }
-        
- }
 
 async function validate(url){
     const response= await fetch(url).then((res)=>true)
@@ -70,4 +53,4 @@ function checkError(url){
     return "URL Not Found";
 }
 
-module.exports ={createSqlDate,addressExists,validate,checkError};
+module.exports ={createSqlDate,validate,checkError};
