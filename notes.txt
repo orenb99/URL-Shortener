@@ -1,4 +1,4 @@
-fix the async of getData()- Done
+fix the async of getData() works only on second time
 
 get all the data in the same JSON file- Done
 

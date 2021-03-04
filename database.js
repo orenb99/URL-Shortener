@@ -17,10 +17,14 @@ class Database{
         this.storage=[];
         this.updateData();
     }
-    async getData(){
-        let res= await JSON.parse(fs.readFileSync(`${__dirname}/storage/data.json`,"utf-8"));
-        this.storage=res;
-        return true;
+    getData(){
+        fs.readFile("./storage/data.json","utf-8",(err,data)=>{
+            if(err)
+                console.log(err);
+            else{
+                this.storage=JSON.parse(data);
+            }
+        })
     }
     async addressExists(url){
         let urlArray=await this.storage.map((value,index)=>value.originalUrl);
@@ -32,7 +36,13 @@ class Database{
         }
      }
     updateData(){
-        fs.writeFileSync(`./storage/data.json`,JSON.stringify(this.storage,null,4));
+        let buffer= Buffer.from(JSON.stringify(this.storage,null,4));
+        fs.writeFile("./storage/data.json",buffer,err=>{
+            if(err)
+                console.log(err.message)
+            else
+                console.log("data updated");
+        })
     }
 }
 

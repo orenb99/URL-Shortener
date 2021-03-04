@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const fs= require("fs");
+const { url } = require("inspector");
 
 app.use(cors());
 
@@ -13,9 +14,19 @@ app.use(express.urlencoded({extended:false}))
 
 
 let database=new Database();
-app.use(async (req,res,next)=>{
-  res=await database.getData();
-  next();
+app.use((req,res,next)=>{
+  // let promise=new Promise((resolve,reject)=>{
+  //   resolve(database.getData());
+  // }).then((data)=>{
+  //   console.log(data);
+  //   next();
+  // });
+  database.getData();
+  setTimeout(()=>{
+    next();
+  },300);
+  
+  
 })
 
 
@@ -55,14 +66,17 @@ app.post("/api/shorturl/new/",async (req,res)=>{
 
 app.get("/api/shorturl/:id",(req,res)=>{
   let {id}=req.params;
-  fs.readdir("./storage/",async (err,files)=>{
-    if(files.includes(id+".json")){
-      let file=await JSON.parse(fs.readFileSync(`${__dirname}/storage/${id}.json`,"utf-8"));
-      res.redirect(302,file.originalUrl)
+  let urlArray=database.storage.map((value)=>value.shortUrl);
+    if(urlArray.includes(Number(id))){
+      fs.readFile(`${__dirname}/storage/data.json`,"utf-8",(err)=>{
+        if(err)
+          console.log(err.message);
+        else
+          res.redirect(302,database.storage[Number(id)].originalUrl);
+      });
     }
     else
       res.status(404).send("file not found");
-  })
 })
 
 app.post("/api/clearCache/all", async (req,res)=>{
