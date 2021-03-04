@@ -40,8 +40,6 @@ class Database{
         fs.writeFile("./storage/data.json",buffer,err=>{
             if(err)
                 console.log(err.message)
-            else
-                console.log("data updated");
         })
     }
 }

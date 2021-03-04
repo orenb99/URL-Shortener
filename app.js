@@ -15,18 +15,10 @@ app.use(express.urlencoded({extended:false}))
 
 let database=new Database();
 app.use((req,res,next)=>{
-  // let promise=new Promise((resolve,reject)=>{
-  //   resolve(database.getData());
-  // }).then((data)=>{
-  //   console.log(data);
-  //   next();
-  // });
   database.getData();
   setTimeout(()=>{
     next();
   },300);
-  
-  
 })
 
 
@@ -35,7 +27,6 @@ app.get("/", async (req, res) => {
 });
 app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
-  console.log(body);
     let storage=database.storage;
     let id=storage.length;
     //let valid=await utils.validate(JSON.stringify(body.url).slice(1,JSON.stringify(body.url).length-1));
@@ -64,7 +55,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     else{
       data.redirectCount=database.storage[exists].redirectCount;
     }
-    res.send(data);
+    res.status(201).send(data);
 })
 
 app.get("/api/shorturl/:id",(req,res)=>{
@@ -80,13 +71,15 @@ app.get("/api/shorturl/:id",(req,res)=>{
         }
       });
     }
-    else
+    else if(Number(id))
       res.status(404).send("file not found");
+    else
+      res.status(400).send("Invalid ID");
 })
 
 app.post("/api/clearCache/all", async (req,res)=>{
     database.clear();
-    res.send(`directory cleared`);
+    res.status(205).send(`directory cleared`);
     console.log("database cleared");
 })
 module.exports = app;

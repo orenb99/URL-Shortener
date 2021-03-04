@@ -25,6 +25,13 @@
             <input type="submit" value="POST URL" />
           </fieldset>
         </form>
+        <section>
+          <legend>Short Url</legend>
+          <label for="result-input">Short url:</label>
+              <input type="text" id="result-input">
+              <button id="copy-link" >Copy to clipboard</button><br>
+              <a id="old-url" href="#" target="_blank"> Link</a>
+      </section>
         <form action="api/clearCache/all" method="POST">
           <input type="submit" value="Delete All"/>
         </form>
