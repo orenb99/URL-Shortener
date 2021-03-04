@@ -4,6 +4,6 @@ testing on a different storage
 
 similar urls
 
+custom urls
 
-after posting redirect to another html
-
+JSON.bin?
