@@ -1,9 +1,6 @@
-fix the async of getData() works only on second time
+axios
 
-get all the data in the same JSON file- Done
-
-
-testing  
+testing on a different storage  
 
 similar urls
 
