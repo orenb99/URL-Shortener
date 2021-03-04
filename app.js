@@ -37,6 +37,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
     let storage=database.storage;
     let id=storage.length;
+    //let valid=await utils.validate(JSON.stringify(body.url).slice(1,JSON.stringify(body.url).length-1));
     let valid=await utils.validate(body.url);
     if(valid!==true){
       let status;
@@ -60,6 +61,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     }
     else{
       database.addRedirect(exists);
+      data.redirectCount=database.storage[exists].redirectCount;
     }
     res.send(data);
 })
