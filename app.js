@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 app.use("/public", express.static(`./public`));
+app.use("/views", express.static(`./views`));
+
 app.use(express.urlencoded({extended:false}))
 
 
@@ -29,7 +31,6 @@ app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
     let storage=database.storage;
     let id=storage.length;
-    //let valid=await utils.validate(JSON.stringify(body.url).slice(1,JSON.stringify(body.url).length-1));
     let valid=await utils.validate(body.url);
     if(valid!==true){
       let status;
@@ -54,8 +55,11 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     }
     else{
       data.redirectCount=database.storage[exists].redirectCount;
+      data.id=database.storage[exists].id;
+      data.shortUrl=database.storage[exists].shortUrl;
     }
-    res.status(201).send(data);
+    // res.render("api/shorturl/new/");
+    // //res.status(201).send(data);
 })
 
 app.get("/api/shorturl/:id",(req,res)=>{
