@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 app.use("/public", express.static(`./public`));
-app.use("/views", express.static(`./views`));
+app.use("/views", express.static("./views"));
 
 app.use(express.urlencoded({extended:false}))
 
@@ -27,6 +27,8 @@ app.use((req,res,next)=>{
 app.get("/", async (req, res) => {
   res.status(302).sendFile(__dirname + "/views/index.html");
 });
+
+
 app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
     let storage=database.storage;
@@ -58,8 +60,8 @@ app.post("/api/shorturl/new/",async (req,res)=>{
       data.id=database.storage[exists].id;
       data.shortUrl=database.storage[exists].shortUrl;
     }
-    // res.render("api/shorturl/new/");
-    // //res.status(201).send(data);
+    //res.status(302).sendFile(__dirname + "/views/result.html");
+    res.status(201).send(data);
 })
 
 app.get("/api/shorturl/:id",(req,res)=>{

@@ -830,12 +830,14 @@ module.exports = {
 
 },{"./formats":1}],6:[function(require,module,exports){
 
-const qs=require("qs")
+const qs=require("qs");
+const body=document.getElementById("body");
 const resInput=document.getElementById('result-input');
 const copyButton=document.getElementById('copy-link');
 const submit=document.getElementById('submit');
 const link=document.getElementById('old-url');
 function getData() {
+    console.log("entered");
     axios({
         method:"post",
         url: 'http://localhost:3000/api/shorturl/new',
@@ -863,6 +865,5 @@ function getData() {
     resInput.setSelectionRange(0, 99999)
     document.execCommand("copy");
 });
-
-submit.addEventListener("click",getData);
+body.addEventListener("load",getData());
 },{"qs":2}]},{},[6]);

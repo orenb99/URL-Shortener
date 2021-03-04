@@ -25,22 +25,13 @@
             <input type="submit" id="submit" value="POST URL" />
           </fieldset>
         </form>
-        <form action="api/clearCache/all" method="POST">
+        <form action="api/clearCache/all/" method="POST">
           <input type="submit" value="Delete All"/>
         </form>
       </section>
-      <section>
-        <legend>Short Url</legend>
-        <label for="result-input">Short url:</label>
-            <input type="text" id="result-input">
-            <button id="copy-link" >Copy to clipboard</button><br>
-            <a id="old-url" href="#" target="_blank"> Link</a>
-    </section>
     </main>
     <footer>
       <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="./views/bundle.js"></script>
   </body>
 </html>
