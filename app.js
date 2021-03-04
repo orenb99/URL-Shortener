@@ -35,6 +35,7 @@ app.get("/", async (req, res) => {
 });
 app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
+  console.log(body);
     let storage=database.storage;
     let id=storage.length;
     //let valid=await utils.validate(JSON.stringify(body.url).slice(1,JSON.stringify(body.url).length-1));
@@ -60,7 +61,6 @@ app.post("/api/shorturl/new/",async (req,res)=>{
       database.post(data);
     }
     else{
-      database.addRedirect(exists);
       data.redirectCount=database.storage[exists].redirectCount;
     }
     res.send(data);
@@ -73,8 +73,10 @@ app.get("/api/shorturl/:id",(req,res)=>{
       fs.readFile(`${__dirname}/storage/data.json`,"utf-8",(err)=>{
         if(err)
           console.log(err.message);
-        else
+        else{
+          database.addRedirect(Number(id));
           res.redirect(302,database.storage[Number(id)].originalUrl);
+        }
       });
     }
     else
