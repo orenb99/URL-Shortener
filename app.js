@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const fs= require("fs");
-const { url } = require("inspector");
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -53,7 +53,8 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     let exists=await database.addressExists(body.url);
     let data={
       originalUrl: body.url,
-      shortUrl:id,
+      shortUrl: `http://localhost:${PORT}/api/shorturl/${id}`,
+      id:id,
       creationDate: utils.createSqlDate(),
       redirectCount:1, 
     }
@@ -68,8 +69,8 @@ app.post("/api/shorturl/new/",async (req,res)=>{
 
 app.get("/api/shorturl/:id",(req,res)=>{
   let {id}=req.params;
-  let urlArray=database.storage.map((value)=>value.shortUrl);
-    if(urlArray.includes(Number(id))){
+  let idArray=database.storage.map((value)=>value.id);
+    if(idArray.includes(Number(id))){
       fs.readFile(`${__dirname}/storage/data.json`,"utf-8",(err)=>{
         if(err)
           console.log(err.message);
