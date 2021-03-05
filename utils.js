@@ -17,7 +17,7 @@ function createSqlDate(){
     return dateString;
 }
 
-async function validate(url){
+async function validateOriginal(url){
     const response= await fetch(url).then((res)=>true)
     .catch((rej)=>checkError(url));
     return response;
@@ -53,4 +53,4 @@ function checkError(url){
     return "URL Not Found. Maybe you meant something else?";
 }
 
-module.exports ={createSqlDate,validate,checkError};
+module.exports ={createSqlDate,validateOriginal,checkError};

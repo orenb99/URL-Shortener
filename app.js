@@ -34,7 +34,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
   let {body}=req;
     let storage=database.storage;
     let id=storage.length;
-    let valid=await utils.validate(body.url);
+    let valid=await utils.validateOriginal(body.url);
     if(valid!==true){
       let status;
       if(valid.startsWith("Hostname")||valid.startsWith("Protocol"))
@@ -82,6 +82,10 @@ app.post("/api/shorturl/new/",async (req,res)=>{
 
 app.get("/api/shorturl/:shortUrl",(req,res)=>{
   let {shortUrl}=req.params;
+  if(!utils.validateShort(shortUrl)){
+    res.status(400).send("Invalid URL")
+    return;
+  }
   shortUrl="http://localhost:3000/api/shorturl/"+shortUrl;
   let shortUrlArray=database.storage.map((value)=>String(value.shortUrl));
     if(shortUrlArray.includes(shortUrl)){
@@ -94,7 +98,7 @@ app.get("/api/shorturl/:shortUrl",(req,res)=>{
         }
       });
     }
-    else if(Number(shortUrl))
+    else
       res.status(404).send("file not found");
 })
 

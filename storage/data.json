@@ -1,23 +1,16 @@
 [
     {
         "originalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
-        "shortUrl": "http://localhost:3000/api/shorturl/asd",
+        "shortUrl": "http://localhost:3000/api/shorturl/0",
         "id": 0,
-        "creationDate": "2021-03-05 16:10:32",
+        "creationDate": "2021-03-05 17:04:12",
         "redirectCount": 1
     },
     {
         "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/1",
         "id": 1,
-        "creationDate": "2021-03-05 16:10:39",
-        "redirectCount": 1
-    },
-    {
-        "originalUrl": "https://www.youtube.com/watch?v=SLpUKAGnm-g&ab_channel=WebDevSimplified",
-        "shortUrl": "http://localhost:3000/api/shorturl/2",
-        "id": 2,
-        "creationDate": "2021-03-05 16:11:10",
+        "creationDate": "2021-03-05 17:12:13",
         "redirectCount": 1
     }
 ]

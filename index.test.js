@@ -3,16 +3,20 @@ const fs=require("fs");
 const app=require("./app");
 
 const correctData={
-    url:"https://www.youtube.com/"
+    url:"https://www.youtube.com/",
+    custom:"",
 };
 const hostnameError={
-    url:"https://www.youtube/"
+    url:"https://www.youtube/",
+    custom:"",
 }
 const protocolError={
-    url:"ps://www.youtube.com/"
+    url:"ps://www.youtube.com/",
+    custom:"",
 }
 const notFoundError={
-    url:"https://www.yasdasdasde.com/"
+    url:"https://www.yasdasdasde.com/",
+    custom:"",
 }
 
 describe("Clear Data",()=>{
@@ -77,7 +81,6 @@ describe("Redirection",()=>{
     })
     it("Should return an error if the url isn't found",async ()=>{
         const response1= await (request(app).get("/api/shorturl/-1/"));
-        const response2= await (request(app).get("/api/shorturl/asd/"));
         expect(response1.status).toBe(404);
         expect(response2.status).toBe(400);
     })

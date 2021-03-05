@@ -11,6 +11,9 @@ const errorP=document.getElementById("error-message");
 function getData() {
   let dataURL=reqInput.value;
   let customURL=custom.value;
+  let characters = /^[0-9a-zA-Z]+$/;
+    if(Number(customURL)<0||customURL.match(characters)===null)
+      customURL="";
     axios({
         method:"post",
         url: 'http://localhost:3000/api/shorturl/new',
@@ -44,5 +47,6 @@ function getData() {
     resInput.setSelectionRange(0, 99999)
     document.execCommand("copy");
 });
+
 
 submit.addEventListener("click",getData);
