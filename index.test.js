@@ -6,6 +6,10 @@ const correctData={
     url:"https://www.youtube.com/",
     custom:"",
 };
+const correctData2={
+    url:"https://www.google.com/",
+    custom:"test2",
+};
 const hostnameError={
     url:"https://www.youtube/",
     custom:"",
@@ -109,19 +113,29 @@ describe("Custom URls",()=>{
         const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
         expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/test");
     })
+    test("If doesn't update for invalid requests",async()=>{
+        correctData.custom="";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/0");
+    })
+
     it("Should update the custom url",async()=>{
         correctData.custom="change";
         const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
         expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/change");
     })
-    test("If doesn't update for invalid requests",async()=>{
-        correctData.custom="";
-        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
-        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/0");
+    
+    test("If doesn't update for existing urls",async()=>{
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData2);
+        correctData2.custom="change";
+        const response2= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData2);
+        expect(response2.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/test2");
     })
-    test("If doesn't update for invalid requests",async()=>{
-        correctData.custom="";
-        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
-        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/0");
+
+
+    test("If fixes invalid custom urls ",async()=>{
+        correctData2.shortUrl="123";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData2);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/test2");
     })
 })
