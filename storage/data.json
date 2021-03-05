@@ -11,6 +11,6 @@
         "shortUrl": "http://localhost:3000/api/shorturl/1",
         "id": 1,
         "creationDate": "2021-03-05 17:12:13",
-        "redirectCount": 1
+        "redirectCount": 2
     }
 ]
