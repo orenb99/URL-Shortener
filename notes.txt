@@ -1,9 +1,7 @@
 testing on a different storage  
 
-add axios tests
-
 styling
 
-custom urls
+testing custom urls
 
 JSON.bin?
