@@ -36,9 +36,9 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     let valid=await utils.validate(body.url);
     if(valid!==true){
       let status;
-      if(valid==="Hostname Error"||valid==="Protocol Error")
-        status=403;
-      else if(valid==="URL Not Found")
+      if(valid.startsWith("Hostname")||valid.startsWith("Protocol"))
+        status=400;
+      else if(valid.startsWith("URL"))
         status=404;
       res.status(status).send("Invalid URL: "+valid)
       return
@@ -61,7 +61,6 @@ app.post("/api/shorturl/new/",async (req,res)=>{
       data.id=database.storage[exists].id;
       data.shortUrl=database.storage[exists].shortUrl;
     }
-    //res.status(302).sendFile(__dirname + "/views/result.html");
     res.status(201).send(data);
 })
 

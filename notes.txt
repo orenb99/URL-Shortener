@@ -1,8 +1,4 @@
-axios
-
 testing on a different storage  
-
-similar urls
 
 custom urls
 

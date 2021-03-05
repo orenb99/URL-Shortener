@@ -35,7 +35,7 @@ function checkError(url){
         checkProtocol=true;
     }
     else
-        return "Protocol Error";
+        return "Protocol Error. Correct or add a protocol";
 
     if(url.endsWith("/"))
         url=url.slice(0,url.length-1);
@@ -48,9 +48,9 @@ function checkError(url){
         }
     }
     if(!checkDomain||!url.startsWith("www."))
-        return "Hostname Error";
+        return "Hostname Error. Check your host";
         
-    return "URL Not Found";
+    return "URL Not Found. Maybe you meant something else?";
 }
 
 module.exports ={createSqlDate,validate,checkError};

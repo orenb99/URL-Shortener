@@ -64,8 +64,8 @@ describe("Post URL",()=>{
         const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(hostnameError);
         const response2= await (request(app).post("/api/shorturl/new/")).type("form").send(protocolError);
         const response3= await (request(app).post("/api/shorturl/new/")).type("form").send(notFoundError);
-        expect(response1.status).toBe(403);
-        expect(response2.status).toBe(403);
+        expect(response1.status).toBe(400);
+        expect(response2.status).toBe(400);
         expect(response3.status).toBe(404);
     })
 })

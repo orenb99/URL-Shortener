@@ -1,12 +1,14 @@
 
 const qs=require("qs");
-const body=document.getElementById("body");
+const utils=require("../utils");
+const reqInput=document.getElementById("url_input");
 const resInput=document.getElementById('result-input');
 const copyButton=document.getElementById('copy-link');
 const submit=document.getElementById('submit');
 const link=document.getElementById('old-url');
+const errorP=document.getElementById("error-message");
 function getData() {
-    console.log("entered");
+  let dataURL=reqInput.value;
     axios({
         method:"post",
         url: 'http://localhost:3000/api/shorturl/new',
@@ -14,14 +16,19 @@ function getData() {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         data: qs.stringify({
-            url:"https://www.youtube.com",
+            url:dataURL,
         })
     })
-    .then(res=>showOutput(res));
-  }
+    .then(res=>{
+        showOutput(res)
+        errorP.innerHTML="";
+    }
+    )
+    .catch(err=>
+      errorP.innerText=utils.checkError(dataURL)
+      )}
   
   function showOutput(res) {
-    console.log(res);
     let data=JSON.parse(JSON.stringify(res.data));
     resInput.value = data.shortUrl;
     link.innerText= data.originalUrl;
@@ -34,4 +41,5 @@ function getData() {
     resInput.setSelectionRange(0, 99999)
     document.execCommand("copy");
 });
-body.addEventListener("load",getData());
+
+submit.addEventListener("click",getData);
