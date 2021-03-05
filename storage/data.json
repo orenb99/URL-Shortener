@@ -3,7 +3,7 @@
         "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/0",
         "id": 0,
-        "creationDate": "2021-03-04 20:47:13",
-        "redirectCount": 1
+        "creationDate": "2021-03-05 13:01:58",
+        "redirectCount": 3
     }
 ]

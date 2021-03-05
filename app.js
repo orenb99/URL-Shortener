@@ -43,10 +43,9 @@ app.post("/api/shorturl/new/",async (req,res)=>{
       res.status(status).send("Invalid URL: "+valid)
       return
     }
-
-    let exists=await database.addressExists(body.url);
     if(body.url[body.url.length-1]==="/")
       body.url=body.url.slice(0,body.url.length-1);
+    let exists=await database.addressExists(body.url);
     let data={
       originalUrl: body.url,
       shortUrl: `http://localhost:${PORT}/api/shorturl/${id}`,
