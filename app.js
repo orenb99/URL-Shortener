@@ -85,7 +85,7 @@ app.get("/api/shorturl/:shortUrl",(req,res)=>{
   let characters = /^[0-9a-zA-Z]+$/;
     if(Number(shortUrl)<0||shortUrl.match(characters)===null){
       res.status(400).send("Invalid URL")
-      return
+      return;
   }
   shortUrl="http://localhost:3000/api/shorturl/"+shortUrl;
   let shortUrlArray=database.storage.map((value)=>String(value.shortUrl));
@@ -99,7 +99,7 @@ app.get("/api/shorturl/:shortUrl",(req,res)=>{
         }
       });
     }
-    else if(Number(shortUrl))
+    else
       res.status(404).send("file not found");
 })
 

@@ -80,7 +80,8 @@ describe("Redirection",()=>{
         expect(response.status).toBe(302);
     })
     it("Should return an error if the url isn't found",async ()=>{
-        const response1= await (request(app).get("/api/shorturl/-1/"));
+        const response1= await (request(app).get("/api/shorturl/123/"));
+        const response2= await (request(app).get("/api/shorturl/!@#!@#/"));
         expect(response1.status).toBe(404);
         expect(response2.status).toBe(400);
     })

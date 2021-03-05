@@ -1,16 +1,9 @@
 [
     {
-        "originalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+        "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/0",
         "id": 0,
-        "creationDate": "2021-03-05 17:04:12",
-        "redirectCount": 1
-    },
-    {
-        "originalUrl": "https://www.youtube.com",
-        "shortUrl": "http://localhost:3000/api/shorturl/1",
-        "id": 1,
-        "creationDate": "2021-03-05 17:12:13",
-        "redirectCount": 2
+        "creationDate": "2021-03-05 17:29:00",
+        "redirectCount": 3
     }
 ]
