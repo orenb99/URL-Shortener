@@ -12,16 +12,23 @@
     <main>
       <section>
             <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
+            <label for="url_input">URL to shorten:</label>
             <input
               id="url_input"
               type="text"
               name="url"
               placeholder="https://www.freecodecamp.org/"
               required
-            />
+            /><br><br>
+            <label for="url_input">Shortened URL:</label>
+            <input
+              id="custom-url"
+              type="text"
+              name="custom"
+            /><br>
             <button id="submit" value="POST URL">POST URL</button>
             <p id="error-message"></p>
+            
         <form action="api/clearCache/all/" method="POST">
           <input type="submit" value="Delete All"/>
         </form>

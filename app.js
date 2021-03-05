@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const fs= require("fs");
+const { url } = require("inspector");
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
@@ -45,42 +46,56 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     }
     if(body.url[body.url.length-1]==="/")
       body.url=body.url.slice(0,body.url.length-1);
-    let exists=await database.addressExists(body.url);
+      
+    let urlExists=await database.addressExists(body.url,"originalUrl");
+    let shortExists=await database.addressExists(body.custom,"shortUrl");
+    let shortUrl=body.custom;
+    if(body.custom===""||Number(body.custom))
+      shortUrl=id;
+    
     let data={
       originalUrl: body.url,
-      shortUrl: `http://localhost:${PORT}/api/shorturl/${id}`,
+      shortUrl: `http://localhost:${PORT}/api/shorturl/${shortUrl}`,
       id:id,
       creationDate: utils.createSqlDate(),
       redirectCount:1, 
     }
-    if(exists===false){
+    if(urlExists===false){
+      if(shortExists!==false){
+        data.shortUrl=`http://localhost:${PORT}/api/shorturl/${database.storage[shortExists].id}`
+      }
       database.post(data);
+
     }
     else{
-      data.redirectCount=database.storage[exists].redirectCount;
-      data.id=database.storage[exists].id;
-      data.shortUrl=database.storage[exists].shortUrl;
+      if(shortExists===false){
+        if(shortUrl===id)
+          shortUrl=database.storage[urlExists].id;
+        database.updateShortUrl(urlExists,`http://localhost:${PORT}/api/shorturl/${shortUrl}`);
+      }
+      data.redirectCount=database.storage[urlExists].redirectCount;
+      data.id=database.storage[urlExists].id;
+      data.shortUrl=database.storage[urlExists].shortUrl;
     }
     res.status(201).send(data);
 })
 
-app.get("/api/shorturl/:id",(req,res)=>{
-  let {id}=req.params;
-  let idArray=database.storage.map((value)=>value.id);
-    if(idArray.includes(Number(id))){
+app.get("/api/shorturl/:shortUrl",(req,res)=>{
+  let {shortUrl}=req.params;
+  shortUrl="http://localhost:3000/api/shorturl/"+shortUrl;
+  let shortUrlArray=database.storage.map((value)=>String(value.shortUrl));
+    if(shortUrlArray.includes(shortUrl)){
       fs.readFile(`${__dirname}/storage/data.json`,"utf-8",(err)=>{
         if(err)
           console.log(err.message);
         else{
-          database.addRedirect(Number(id));
-          res.redirect(302,database.storage[Number(id)].originalUrl);
+          database.addRedirect(shortUrlArray.indexOf(shortUrl));
+          res.redirect(302,database.storage[shortUrlArray.indexOf(shortUrl)].originalUrl);
         }
       });
     }
-    else if(Number(id))
+    else if(Number(shortUrl))
       res.status(404).send("file not found");
-    else
-      res.status(400).send("Invalid ID");
 })
 
 app.post("/api/clearCache/all", async (req,res)=>{

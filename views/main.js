@@ -2,6 +2,7 @@
 const qs=require("qs");
 const utils=require("../utils");
 const reqInput=document.getElementById("url_input");
+const custom=document.getElementById("custom-url");
 const resInput=document.getElementById('result-input');
 const copyButton=document.getElementById('copy-link');
 const submit=document.getElementById('submit');
@@ -9,6 +10,7 @@ const link=document.getElementById('old-url');
 const errorP=document.getElementById("error-message");
 function getData() {
   let dataURL=reqInput.value;
+  let customURL=custom.value;
     axios({
         method:"post",
         url: 'http://localhost:3000/api/shorturl/new',
@@ -17,6 +19,7 @@ function getData() {
         },
         data: qs.stringify({
             url:dataURL,
+            custom: customURL,
         })
     })
     .then(res=>{

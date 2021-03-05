@@ -1,6 +1,4 @@
-const { json } = require("body-parser");
 const fs=require("fs");
-const { type } = require("os");
 class Database{
     constructor(){
         this.storage=[];
@@ -9,8 +7,8 @@ class Database{
         this.storage.push(data);
         this.updateData();
     }
-    addRedirect(shortUrl){
-        this.storage[shortUrl].redirectCount=this.storage[shortUrl].redirectCount+1;
+    addRedirect(index){
+        this.storage[index].redirectCount=this.storage[index].redirectCount+1;
         this.updateData();
     }
     clear(){
@@ -26,8 +24,9 @@ class Database{
             }
         })
     }
-    async addressExists(url){
-        let urlArray=await this.storage.map((value,index)=>value.originalUrl);
+    async addressExists(url,prop){
+        let urlArray=await this.storage.map((value,index)=>value[prop]);
+        console.log(urlArray,url)
         if(!urlArray.includes(url))
             return false;
         else{
@@ -35,6 +34,12 @@ class Database{
             return index;
         }
      }
+     
+    async updateShortUrl(id,shortUrl){
+        this.storage[id].shortUrl=shortUrl;
+        this.updateData();
+
+    }
     updateData(){
         let buffer= Buffer.from(JSON.stringify(this.storage,null,4));
         fs.writeFile("./storage/data.json",buffer,err=>{
