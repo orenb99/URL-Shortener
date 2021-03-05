@@ -3,28 +3,7 @@
         "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/0",
         "id": 0,
-        "creationDate": "2021-03-05 13:21:58",
+        "creationDate": "2021-03-05 13:57:40",
         "redirectCount": 3
-    },
-    {
-        "originalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
-        "shortUrl": "http://localhost:3000/api/shorturl/1",
-        "id": 1,
-        "creationDate": "2021-03-05 13:33:50",
-        "redirectCount": 1
-    },
-    {
-        "originalUrl": "http://www.googe.co",
-        "shortUrl": "http://localhost:3000/api/shorturl/2",
-        "id": 2,
-        "creationDate": "2021-03-05 13:46:36",
-        "redirectCount": 1
-    },
-    {
-        "originalUrl": "http://www.goge.com",
-        "shortUrl": "http://localhost:3000/api/shorturl/3",
-        "id": 3,
-        "creationDate": "2021-03-05 13:46:40",
-        "redirectCount": 2
     }
 ]
