@@ -2,8 +2,3 @@ testing on a different storage
 
 styling
 
-testing custom urls
-
-change the delete from post to delete
-
-JSON.bin?
