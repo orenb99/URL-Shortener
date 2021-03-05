@@ -5,6 +5,7 @@ const reqInput=document.getElementById("url_input");
 const custom=document.getElementById("custom-url");
 const resInput=document.getElementById('result-input');
 const copyButton=document.getElementById('copy-link');
+const deleteButton=document.getElementById('delete-button');
 const submit=document.getElementById('submit');
 const link=document.getElementById('old-url');
 const errorP=document.getElementById("error-message");
@@ -32,8 +33,16 @@ function getData() {
     )
     .catch(err=>
       errorP.innerText=utils.checkError(dataURL)
-      )}
-  
+)}
+  function clearCache(){
+    axios({
+      method:"delete",
+      url: 'api/clearCache/all',
+    }).then(()=>{
+      errorP.innerText="Data cleared!"
+    })
+  }
+
   function showOutput(res) {
     let data=JSON.parse(JSON.stringify(res.data));
     resInput.value = data.shortUrl;
@@ -50,3 +59,4 @@ function getData() {
 
 
 submit.addEventListener("click",getData);
+deleteButton.addEventListener("click",clearCache);

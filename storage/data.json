@@ -3,14 +3,14 @@
         "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/change",
         "id": 0,
-        "creationDate": "2021-03-05 19:33:09",
+        "creationDate": "2021-03-05 19:39:50",
         "redirectCount": 1
     },
     {
         "originalUrl": "https://www.google.com",
         "shortUrl": "http://localhost:3000/api/shorturl/test2",
         "id": 1,
-        "creationDate": "2021-03-05 19:33:10",
+        "creationDate": "2021-03-05 19:39:51",
         "redirectCount": 1
     }
 ]

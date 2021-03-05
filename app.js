@@ -103,7 +103,7 @@ app.get("/api/shorturl/:shortUrl",(req,res)=>{
       res.status(404).send("file not found");
 })
 
-app.post("/api/clearCache/all", async (req,res)=>{
+app.delete("/api/clearCache/all", async (req,res)=>{
     database.clear();
     res.status(205).send(`directory cleared`);
     console.log("database cleared");

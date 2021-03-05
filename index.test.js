@@ -25,7 +25,7 @@ const notFoundError={
 
 describe("Clear Data",()=>{
     it("Should reset the data",async ()=>{
-        const response=await request(app).post("/api/clearCache/all");
+        const response=await request(app).delete("/api/clearCache/all");
         fs.readFile("./storage/data.json",async (err,data)=>{
             if(err)
                 console.log(err.message);
@@ -108,7 +108,7 @@ describe("Redirection",()=>{
 
 describe("Custom URls",()=>{
     it("Should create an item with a custom URL",async()=>{
-        const response=await request(app).post("/api/clearCache/all");
+        const response=await request(app).delete("/api/clearCache/all");
         correctData.custom="test";
         const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
         expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/test");
