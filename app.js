@@ -48,7 +48,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
       body.url=body.url.slice(0,body.url.length-1);
       
     let urlExists=await database.addressExists(body.url,"originalUrl");
-    let shortExists=await database.addressExists(body.custom,"shortUrl");
+    let shortExists=await database.addressExists(`http://localhost:${PORT}/api/shorturl/`+body.custom,"shortUrl");
     let shortUrl=body.custom;
     if(body.custom===""||Number(body.custom))
       shortUrl=id;
@@ -62,7 +62,7 @@ app.post("/api/shorturl/new/",async (req,res)=>{
     }
     if(urlExists===false){
       if(shortExists!==false){
-        data.shortUrl=`http://localhost:${PORT}/api/shorturl/${database.storage[shortExists].id}`
+        data.shortUrl=`http://localhost:${PORT}/api/shorturl/${id}`
       }
       database.post(data);
 

@@ -26,7 +26,6 @@ class Database{
     }
     async addressExists(url,prop){
         let urlArray=await this.storage.map((value,index)=>value[prop]);
-        console.log(urlArray,url)
         if(!urlArray.includes(url))
             return false;
         else{
