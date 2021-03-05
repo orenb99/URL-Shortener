@@ -4,4 +4,6 @@ styling
 
 testing custom urls
 
+change the delete from post to delete
+
 JSON.bin?

@@ -101,3 +101,27 @@ describe("Redirection",()=>{
         });
     })
 })
+
+describe("Custom URls",()=>{
+    it("Should create an item with a custom URL",async()=>{
+        const response=await request(app).post("/api/clearCache/all");
+        correctData.custom="test";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/test");
+    })
+    it("Should update the custom url",async()=>{
+        correctData.custom="change";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/change");
+    })
+    test("If doesn't update for invalid requests",async()=>{
+        correctData.custom="";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/0");
+    })
+    test("If doesn't update for invalid requests",async()=>{
+        correctData.custom="";
+        const response1= await (request(app).post("/api/shorturl/new/")).type("form").send(correctData);
+        expect(response1.body.shortUrl).toEqual("http://localhost:3000/api/shorturl/0");
+    })
+})
