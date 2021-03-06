@@ -3,21 +3,14 @@
         "originalUrl": "https://www.youtube.com",
         "shortUrl": "http://localhost:3000/api/shorturl/change",
         "id": 0,
-        "creationDate": "2021-03-06 19:56:30",
+        "creationDate": "2021-03-07 00:36:38",
         "redirectCount": 1
     },
     {
         "originalUrl": "https://www.google.com",
         "shortUrl": "http://localhost:3000/api/shorturl/test2",
         "id": 1,
-        "creationDate": "2021-03-06 19:56:32",
-        "redirectCount": 1
-    },
-    {
-        "originalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
-        "shortUrl": "http://localhost:3000/api/shorturl/2",
-        "id": 2,
-        "creationDate": "2021-03-06 20:19:39",
+        "creationDate": "2021-03-07 00:36:40",
         "redirectCount": 1
     }
 ]
