@@ -12,5 +12,12 @@
         "id": 1,
         "creationDate": "2021-03-06 19:56:32",
         "redirectCount": 1
+    },
+    {
+        "originalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+        "shortUrl": "http://localhost:3000/api/shorturl/2",
+        "id": 2,
+        "creationDate": "2021-03-06 20:19:39",
+        "redirectCount": 1
     }
 ]

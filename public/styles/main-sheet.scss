@@ -1,12 +1,28 @@
+@import "./flexbox.scss";
+
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    color: #222;
-    background-color: #fff;
+    font-weight: bold;
+    color: rgb(15, 6, 63);
+    background-image: linear-gradient(to left,rgb(52, 167, 142),rgb(52, 111, 167));
     text-align: center;
     line-height: 1.4em;
   }
-  
+#title{
+  position: relative;
+  font-size: 50px;
+  top:10vh;
+}
+legend{
+  font-size: 30px;
+  margin: 20px;
+}
+
+label{
+  font-size: large;
+}
+
   main {
     padding: 0;
     margin-top: 40px;
@@ -21,7 +37,7 @@ body {
   }
   
   a {
-    color: #2574a9;
+    color: #2e25a9;
   }
   
   form {
@@ -38,8 +54,17 @@ body {
     padding: 5px;
   }
   
+  button{
+    background-color: rgb(141, 235, 225);
+    border-color: rgb(156, 252, 242);
+    font-weight: bold;
+    color: rgb(15, 6, 63);
+  }
   input[type='text'] {
     width: 220px;
     text-align: center;
+    border-color: rgb(156, 252, 242);
+    background-color: rgb(141, 235, 225);
+    color: rgb(15, 6, 63);
   }
   

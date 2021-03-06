@@ -8,34 +8,35 @@
   </head>
 
   <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
+    <h1 id="title">The Best URL Shortener You Can Find</h1>
+    <main class="flex-container">
       <section>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL to shorten:</label>
+            <label for="url_input" class="flex-item">URL to shorten:</label>
             <input
               id="url_input"
               type="text"
               name="url"
               placeholder="https://www.freecodecamp.org/"
+              class="flex-item"
               required
-            /><br><br>
-            <label for="url_input">Shortened URL:</label>
+            /><br>
+            <label for="url_input" class="flex-item">Shortened URL:</label>
             <input
               id="custom-url"
               type="text"
               name="custom"
+              class="flex-item"
             /><br>
-            <button id="submit" value="POST URL">POST URL</button>
-            <p id="error-message"></p>
+            <button id="submit" value="POST URL" class="flex-item">POST URL</button>
+            <p id="error-message" class="flex-item"></p>
             
-          <button id="delete-button">Delete All</button>
+          <button id="delete-button" class="flex-item">Delete All</button>
       </section>
-      <section>
+      <section class="flex-item">
         <legend>Short Url</legend>
         <label for="result-input">Short url:</label>
             <input type="text" id="result-input">
-            <button id="copy-link" >Copy to clipboard</button><br>
+            <button id="copy-link" >Copy to clipboard</button><br><br>
             <a id="old-url" href="#" target="_blank"> Result Link</a>
     </section>
     </main>
