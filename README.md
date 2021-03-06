@@ -33,6 +33,25 @@ database is a class that reads and process's the information in the data.json fi
     updateShortUrl
     a method that updates the shortUrl
 
+App
+
+    get /
+    redirecting to the home page
+
+    post new
+    adds a new valid url to the storage or sends an error if its invalid. also validates the custom url if entered.
+    if not entered it enters it's id.
+
+    get by shortUrl
+    validates the short url given and redirects the client to that url. also adds 1 to the redirection count.
+
+    delete all
+    clears all the storage in the data.json and in the database.
+
+tests are described in the index.test file.
+
+
+
 
 
 
