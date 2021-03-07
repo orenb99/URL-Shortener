@@ -1,10 +1,10 @@
 [
     {
         "originalUrl": "https://www.youtube.com",
-        "shortUrl": "http://localhost:3000/api/shorturl/change",
+        "shortUrl": "http://localhost:3000/api/shorturl/0",
         "id": 0,
         "creationDate": "2021-03-07 00:36:38",
-        "redirectCount": 1
+        "redirectCount": 4
     },
     {
         "originalUrl": "https://www.google.com",
