@@ -4,30 +4,43 @@
   <head>
     <title>URL Shortener</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link href="./public/style.css" rel="stylesheet" type="text/css" />
+    <link href="public/styles/main-sheet.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
+    <h1 id="title">The Best URL Shortener You Can Find</h1>
+    <main class="flex-container">
       <section>
-        <form action="api/shorturl/new" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
+            <label for="url_input" class="flex-item">URL to shorten:</label>
             <input
               id="url_input"
               type="text"
               name="url"
               placeholder="https://www.freecodecamp.org/"
-            />
-            <input type="submit" value="POST URL" />
-          </fieldset>
-        </form>
+              class="flex-item"
+              required
+            /><br>
+            <label for="url_input" class="flex-item">Shortened URL:</label>
+            <input
+              id="custom-url"
+              type="text"
+              name="custom"
+              class="flex-item"
+            /><br>
+            <button id="submit" value="POST URL" class="flex-item">POST URL</button>
+            <p id="error-message" class="flex-item"></p>
+            
+          <button id="delete-button" class="flex-item">Delete All</button>
       </section>
+      <section class="flex-item">
+        <legend>Short Url</legend>
+        <label for="result-input">Short url:</label>
+            <input type="text" id="result-input">
+            <button id="copy-link" >Copy to clipboard</button><br><br>
+            <a id="old-url" href="#" target="_blank"> Result Link</a>
+    </section>
     </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="../views/bundle.js"></script>
   </body>
 </html>
